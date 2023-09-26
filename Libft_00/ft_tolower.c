@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 17:12:33 by hkai              #+#    #+#             */
-/*   Updated: 2023/09/26 17:29:06 by hkai             ###   ########.fr       */
+/*   Created: 2023/09/26 17:28:59 by hkai              #+#    #+#             */
+/*   Updated: 2023/09/26 17:31:54 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int c)
+int	ft_tolower(int c)
 {
-	if (97 <= c && c <= 122)
-		c -= 32;
+	if (65 <= c && c <= 90)
+		c += 32;
 	return (c);
 }
 
@@ -23,6 +23,6 @@ int	ft_toupper(int c)
 // #include <ctype.h>
 // int main()
 // {
-// 	printf("%c\n", toupper('a'));
-// 	printf("%c\n", ft_toupper('a'));
+// 	printf("%c\n", tolower('Z'));
+// 	printf("%c\n", ft_tolower('Z'));
 // }
