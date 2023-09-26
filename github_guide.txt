@@ -1,0 +1,22 @@
+1. 新規リポジトリ作成（リポジトリ名など）
+2. remoteとの接続をコピぺによってできるところまでくるので
+HTTPに設定した上でコピペを行う
+例: c1r19s1% echo "# 42cursus" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:kaikai-23/42cursus.git
+git push -u origin main
+3. ユーザーネームとパスワードが求められるので
+まずはユーザーネーム（kaikai-23）を入力
+4. パスワードを求められるので一度githubへ戻る
+setting → Devoloper setting
+ → Personal access tokens → Tokens(classic)から
+ Generate new tokenをクリック
+ → Generate new token (classic)をクリック
+ →用途と期限と権限を記入後Generate tokenをクリック
+ →できたtokenをコピーして求められていたパスワードのところにコピペ
+ これで繋がる！
+
+ 使用するときはgit pullしてから使用すること！
