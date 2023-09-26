@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:02:07 by hkai              #+#    #+#             */
-/*   Updated: 2023/09/26 18:18:30 by hkai             ###   ########.fr       */
+/*   Updated: 2023/09/26 19:09:18 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ size_t			ft_strlcat(char *dest, const char *src, size_t size);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
 char			*ft_strchr(const char *s, int c);
+char			*ft_strrchr(const char *s, int c);
 
 #endif
