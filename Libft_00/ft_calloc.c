@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:46:14 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/01 19:01:55 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/01 19:09:55 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*ft_calloc(size_t count, size_t size)
 	void	*arr;
 	size_t	n;
 
+	if (size && count > SIZE_MAX / size)
+		return (NULL);
 	n = count * size;
 	arr = malloc(n);
 	if (!arr)
@@ -25,4 +27,4 @@ void	*ft_calloc(size_t count, size_t size)
 	return (arr);
 }
 
-	// /* 15,16 overflow */ check_calloc((size_t)SIZE_MAX / 10 + (size_t)1, 10);
+	// overflow */ check_calloc((size_t)SIZE_MAX / 10 + (size_t)1, 10);
