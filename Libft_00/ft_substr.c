@@ -25,3 +25,9 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 	str[i] = '\0';
 	return (str);
 }
+
+// #include <stdio.h>
+// int main()
+// {
+// 	printf("%s\n", ft_substr("\0", 0, 0));
+// }
