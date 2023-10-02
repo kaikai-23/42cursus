@@ -8,7 +8,7 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	//動的確保が求められてるからfreeできる形でreturnする
-	if (ft_strlen(s) - 1 <= start)
+	if (ft_strlen(s) - 1 < start)
 		return (ft_strdup("\0"));
 	str = malloc((sizeof(char)) * (len + 1));
 	if (!str)
@@ -29,5 +29,6 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 // #include <stdio.h>
 // int main()
 // {
-// 	printf("%s\n", ft_substr("\0", 0, 0));
+// 	// printf("%s\n", ft_substr("\0", 0, 0));
+// 	// printf("%s\n", ft_substr("a", 0, 1));
 // }
