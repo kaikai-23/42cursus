@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:02:48 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/03 19:09:33 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/03 19:42:46 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,24 @@ static int	digit_count(int n)
 
 //getconf INT_MAX : 2147483647
 //getconf INT_MIN : -2147483648
+//mallocでINT_MINに対応したい
 char	*ft_itoa(int n)
 {
 	char	*str;
 	int		len;
 
 	len = digit_count(n);
-	//debug
-	printf("%d\n", len);
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
 	str[len] = '\0';
 	if (n < 0)
 	{
+		if (n == INT_MIN)
+		{
+			str[--len] = '8';
+			n /= 10;
+		}
 		str[0] = '-';
 		n *= (-1);
 	}
@@ -65,13 +69,13 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-#include <stdio.h>
-int main()
-{
-	printf("result : %s\n", ft_itoa(-2147483648));
-// 	printf("result : %s\n", ft_itoa(2147483647));
-// 	printf("result : %s\n", ft_itoa(-2147483647));
-// 	printf("result : %s\n", ft_itoa(0));
-// 	// printf("result : %s\n", ft_itoa(a));
-// 	// printf("result : %s\n", ft_itoa(2147483648));
-}
+// #include <stdio.h>
+// int main()
+// {
+// 	printf("result : %s\n", ft_itoa(-2147483648));
+// // 	printf("result : %s\n", ft_itoa(2147483647));
+// // 	printf("result : %s\n", ft_itoa(-2147483647));
+// 	// printf("result : %s\n", ft_itoa(0));
+// // 	// printf("result : %s\n", ft_itoa(a));
+// // 	// printf("result : %s\n", ft_itoa(2147483648));
+// }
