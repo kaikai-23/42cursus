@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 19:02:07 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/03 16:08:37 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/03 17:04:13 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(char const *s, char c);
 char			**ft_split(char const *s, char c);
+char			*ft_itoa(int n);
 
 #endif
