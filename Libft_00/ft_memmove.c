@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 16:59:47 by hkai              #+#    #+#             */
-/*   Updated: 2023/09/26 16:08:33 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/04 13:26:55 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,27 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	return ((void *)str_dest);
 }
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
 
-int main(){
-    char buf[] = "ABCDEFG";
-    char buf2[] = "123456789";
-	memmove(buf,buf2,3);
-	printf("%s\n",buf);
-	//領域がかぶるケース
-	char buf5[] = "abcdefg";
-	memmove(buf5 + 2, buf5, 3);
-	printf("%s\n",buf5);
+// int main(){
+//     char buf[] = "ABCDEFG";
+//     char buf2[] = "123456789";
+// 	memmove(buf,buf2,3);
+// 	printf("%s\n",buf);
+// 	//領域がかぶるケース
+// 	char buf5[] = "abcdefg";
+// 	memmove(buf5 + 2, buf5, 3);
+// 	printf("%s\n",buf5);
 
-    char buf3[] = "ABCDEFG";
-    char buf4[] = "123456789";
-	ft_memmove(buf3,buf4,3);
-	printf("%s\n",buf3);
-	//領域がかぶるケース
-	char buf6[] = "abcdefg";
-	ft_memmove(buf6 + 2, buf6, 3);
-	printf("%s\n",buf6);
-}
-// //なぜlenスタートなのか、iじゃダメなのか（ちゃんと説明できるように)
+//     char buf3[] = "ABCDEFG";
+//     char buf4[] = "123456789";
+// 	ft_memmove(buf3,buf4,3);
+// 	printf("%s\n",buf3);
+// 	//領域がかぶるケース
+// 	char buf6[] = "abcdefg";
+// 	ft_memmove(buf6 + 2, buf6, 3);
+// 	printf("%s\n",buf6);
+// }
+// // //なぜlenスタートなのか、iじゃダメなのか（ちゃんと説明できるように)

@@ -1,21 +1,30 @@
-// //debug
-// #include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/04 13:36:30 by hkai              #+#    #+#             */
+/*   Updated: 2023/10/04 13:36:58 by hkai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-void odd_upper(unsigned int index, char *s) {
-    if ((index % 2 != 0) && (('a' <= *s) && (*s <= 'z')))
-	{
-		*s -= 'a' - 'A';
-	}
-}
+// void odd_upper(unsigned int index, char *s) {
+//     if ((index % 2 != 0) && (('a' <= *s) && (*s <= 'z')))
+// 	{
+// 		*s -= 'a' - 'A';
+// 	}
+// }
 
-void ft_striteri(char *s, void (*f)(unsigned int, char*))
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	unsigned int	i;
 
 	if (!s || !f)
-		return;
+		return ;
 	i = 0;
 	while (s[i] != '\0')
 	{
