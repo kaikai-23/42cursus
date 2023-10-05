@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/05 16:53:29 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/05 17:29:11 by hkai             ###   ########.fr       */
+/*   Created: 2023/10/05 17:21:41 by hkai              #+#    #+#             */
+/*   Updated: 2023/10/05 17:32:13 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//ノードそのもののアドレスft_lstadd_frontのlstとは別で考える必要がある。
-//ノードがいくつあるかを数えている
-//最初のノードのポインタがきてるのでnextで更新し続けてNULLの場所を見つける
-int	ft_lstsize(t_list *lst)
+t_list	*ft_lstlast(t_list *lst)
 {
-	int	size;
-
-	size = 0;
 	while (lst != NULL)
 	{
-		size++;
-		//アドレスを直接受け渡し
+		if (lst->next == NULL)
+			break ;
 		lst = lst->next;
 	}
-	return (size);
+	return (lst);
 }
 
 // #include <stdio.h>
@@ -48,8 +42,8 @@ int	ft_lstsize(t_list *lst)
 //     new_node = ft_lstnew((void *)20);
 //     ft_lstadd_front(&head, new_node);
 // ///////////////////////////////////////////
-// //リストのノードの個数を数える
-// 	printf("ノードの個数: %d\n", ft_lstsize(head));
+// //リストのノードの最終の値を出力
+// 	printf("最後のノードの中身: %d\n", (int)ft_lstlast(head)->content);
 // ///////////////////////////////////////////
 //     // 確認のためにリストを表示
 //     t_list *current = head;

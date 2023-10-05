@@ -34,15 +34,20 @@ SRC = ft_isalpha.c \
 	  ft_putchar_fd.c \
 	  ft_putstr_fd.c \
 	  ft_putendl_fd.c \
-	  ft_putnbr_fd.c
+	  ft_putnbr_fd.c \
 
-BONUS_SRC = ft_lstnew.c
+BONUS_SRC = ft_lstnew.c \
+	  		ft_lstadd_front.c \
+	  		ft_lstsize.c \
+	  		ft_lstlast.c \
+			
+
 BONUS_OBJS = $(BONUS_SRC:.c=.o)
 
 OBJS = $(SRC:.c=.o)
 
 # WITH_BONUS が定義されている場合、ボーナスオブジェクトも含める
-ifdef WITH_BONUS
+ifdef BONUS
 OBJS += $(BONUS_OBJS)
 endif
 
@@ -55,7 +60,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAG) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
 	rm -f $(NAME)
@@ -64,5 +69,8 @@ re: fclean all
 
 bonus:
 	make BONUS=1 all
+
+# bonus:
+# 	make BONUS=1
 
 .PHONY: all, clean, fclean, re, bonus
