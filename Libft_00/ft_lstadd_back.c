@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 17:41:38 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/06 16:18:04 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/06 20:20:44 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 //     t_list *new_node;
 
 //     // リストに最初のノード（背番号1）を追加
-//     new_node = ft_lstnew((void *)1);
+//     nenw_ode = ft_lstnew((void *)1);
 //     ft_lstadd_back(&head, new_node);
 
 //     // リストの最後に新しいノード（背番号10）を追加
