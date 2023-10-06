@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:27:43 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/06 20:23:37 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/06 20:28:05 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,35 +42,35 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	return (*new_lst);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-int main()
-{
-// リストの最初へのポインタを初期化
-    t_list *head = ft_lstnew((void *)0);
-    t_list *new_node;
+// int main()
+// {
+// // リストの最初へのポインタを初期化
+//     t_list *head = ft_lstnew((void *)0);
+//     t_list *new_node;
 
-    // リストに最初のノード（背番号1）を追加
-    new_node = ft_lstnew((void *)1);
-    ft_lstadd_back(&head, new_node);
+//     // リストに最初のノード（背番号1）を追加
+//     new_node = ft_lstnew((void *)1);
+//     ft_lstadd_back(&head, new_node);
 
-    // リストの最後に新しいノード（背番号10）を追加
-    new_node = ft_lstnew((void *)10);
-    ft_lstadd_back(&head, new_node);
+//     // リストの最後に新しいノード（背番号10）を追加
+//     new_node = ft_lstnew((void *)10);
+//     ft_lstadd_back(&head, new_node);
 
-    // リストの最後に新しいノード（背番号20）を追加
-    new_node = ft_lstnew((void *)20);
-    ft_lstadd_back(&head, new_node);
+//     // リストの最後に新しいノード（背番号20）を追加
+//     new_node = ft_lstnew((void *)20);
+//     ft_lstadd_back(&head, new_node);
 
-    // 確認のためにリストを表示
-    t_list *current = head;
-    while (current != NULL)
-    {
-        printf("背番号: %d\n", (int)current->content);
-        printf("次のノード: %p\n", current->next);
-        current = current->next;
-    }
+//     // 確認のためにリストを表示
+//     t_list *current = head;
+//     while (current != NULL)
+//     {
+//         printf("背番号: %d\n", (int)current->content);
+//         printf("次のノード: %p\n", current->next);
+//         current = current->next;
+//     }
 
-    // TODO: リストのメモリを解放
-    return 0;
-}
+//     // TODO: リストのメモリを解放
+//     return 0;
+// }
