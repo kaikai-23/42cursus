@@ -6,12 +6,12 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 17:41:38 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/06 20:20:44 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/07 15:07:50 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //debug
-#include <stdio.h>
+// #include <stdio.h>
 
 #include "libft.h"
 
@@ -21,14 +21,19 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 
 	if (!lst || !new)
 		return ;
-	if (lst[0] == NULL)
+	if (*lst == NULL)
 	{
-		lst[0] = new;
-		new->next = NULL;
+		*lst = new;
+		//後ろにもノードが続いているnewが入る可能性があるからヌルにしてはいけない
+		// new->next = NULL;
+		return ;
 	}
-	lastnode_point = ft_lstlast(lst[0]);
+	lastnode_point = ft_lstlast(*lst);
 	lastnode_point->next = new;
-	new->next = NULL;
+	//後ろにもノードが続いているnewが入る可能性があるからヌルにしてはいけない
+	// new->next = NULL;
+
+
 	//ノードはそもそも別のメモリに保存されているものを
 	//nextで繋いでるので配列なような使い方はできない
 	// int	size;

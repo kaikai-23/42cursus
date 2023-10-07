@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:46:14 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/01 19:11:20 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/07 14:47:45 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,22 @@ void	*ft_calloc(size_t count, size_t size)
 	return (arr);
 }
 
-// overflow */ check_calloc((size_t)SIZE_MAX / 10 + (size_t)1, 10);
+// #include <stdio.h>
+
+// int main(void)
+// {
+//     void *ptr;
+
+//     // テストケース9の模倣
+//     ptr = ft_calloc(-5, -5);
+//     if (ptr == NULL)
+//     {
+//         printf("NULLを返す\n");
+//     }
+//     else
+//     {
+//         printf("NULLを返さない＝間違ってる\n");
+//         free(ptr); // 必要な場合、メモリを解放
+//     }
+//     return 0;
+// }

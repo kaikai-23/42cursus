@@ -27,8 +27,19 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 }
 
 // #include <stdio.h>
-// int main()
+// int main ()
 // {
-// 	// printf("%s\n", ft_substr("\0", 0, 0));
-// 	// printf("%s\n", ft_substr("a", 0, 1));
+// char * s = ft_substr("tripouille", 0, 42000);
+// 	printf("%zu\n", strlen(s));
+// 	printf("%zu\n", strlen("tripouille"));
+
+//     // if (strlen(s) == strlen("tripouille"))
+//     // {
+//     //     printf("The allocated size matches the expected size.\n");
+//     // }
+//     // else
+//     // {
+//     //     printf("The allocated size does NOT match the expected size.\n");
+//     // }
+// 	free(s);
 // }
