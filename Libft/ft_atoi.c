@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 15:14:41 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/01 18:44:55 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/08 20:55:37 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_atoi(const char *str)
 		num = num * 10 + (*str - '0');
 		str++;
 	}
-	return (num * flag);
+	return ((int)(num * flag));
 }
 
 // #include <stdio.h>

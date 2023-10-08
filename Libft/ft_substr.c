@@ -8,7 +8,10 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	//動的確保が求められてるからfreeできる形でreturnする
-	if (ft_strlen(s) - 1 < start)
+	// if (ft_strlen(s) - 1 < start)
+	// 	return (ft_strdup("\0"));
+	//上のやつはft_strlen(s)が0の時問題が起こるよ
+	if (ft_strlen(s) < start + 1)
 		return (ft_strdup("\0"));
 	str = malloc((sizeof(char)) * (len + 1));
 	if (!str)

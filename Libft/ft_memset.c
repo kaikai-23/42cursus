@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:58:36 by hkai              #+#    #+#             */
-/*   Updated: 2023/09/26 16:05:41 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/08 20:57:19 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*ft_memset(void *b, int c, size_t len)
 	dest = (unsigned char *)b;
 	while (i < len)
 	{
-		dest[i] = c;
+		dest[i] = (unsigned char)c;
 		i++;
 	}
 	return ((void *)dest);

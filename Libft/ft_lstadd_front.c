@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 16:16:11 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/05 17:08:38 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/08 21:00:30 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 		return ;
 	//lst[0]は*lstでも良い、とにかくリストにおける最初の要素のアドレスである
 	//具体的な値（lstのnextとか）ではないので注意が必要だよ
-	new->next = lst[0];
+	new->next = *lst;
 	//アドレスをアドレスで更新してるよ
-	lst[0] = new;
+	*lst = new;
 }
 
 // #include <stdio.h>

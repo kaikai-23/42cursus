@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 17:33:22 by hkai              #+#    #+#             */
-/*   Updated: 2023/09/26 18:54:49 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/08 20:57:48 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strchr(const char *s, int c)
 	if (*s == after_convert)
 		return ((char *)s);
 	else
-		return ((char *)0);
+		return (NULL);
 }
 
 // #include <stdio.h>

@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:35:56 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/04 13:35:59 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/08 20:58:36 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	len;
-	char	*str;
-	size_t	i;
+	unsigned int	len;
+	char			*str;
+	unsigned int	i;
 
 	if (!s || !f)
 		return (NULL);

@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takaramonkai <takaramonkai@student.42.f    +#+  +:+       +#+        */
+/*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 17:02:48 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/03 23:58:38 by takaramonka      ###   ########.fr       */
+/*   Updated: 2023/10/08 20:56:54 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//debug
-#include <stdio.h>
 
 #include "libft.h"
 

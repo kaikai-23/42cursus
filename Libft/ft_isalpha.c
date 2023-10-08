@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 08:38:47 by hkai              #+#    #+#             */
-/*   Updated: 2023/09/25 19:27:39 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/08 17:30:10 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ int	ft_isalpha(int c)
 // 	return (0);
 // }
 
-// #include <ctype.h>
-// #include <stdio.h>
+#include <ctype.h>
+#include <stdio.h>
 
-// int main (void)
-// {
-// 	char c = 'a';
-// 	if (isalpha(c)){
-// 		printf("%cは英字です\n", c);
-// 	}
-// 	if (ft_isalpha(c)){
-// 		printf("%cは英字です\n", c);
-// 	}
-// }
+int main (void)
+{
+	int c = 'a';
+	if (isalpha(c)){
+		printf("%cは英字です\n", c);
+	}
+	if (ft_isalpha(c)){
+		printf("%cは英字です\n", c);
+	}
+}
