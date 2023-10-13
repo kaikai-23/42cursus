@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:47:06 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/10 13:47:10 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/10 19:34:44 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,18 @@ char *ft_substr(char const *s, unsigned int start, size_t len)
 	//上のやつはft_strlen(s)が0の時問題が起こるよ
 	if (ft_strlen(s) < start + 1)
 		return (ft_strdup("\0"));
+	//lenの長さが4200など大きすぎるケースでmallocで確保し過ぎてしまう。
+	//メモリリークの原因になる
+	i = ft_strlen(s);
+	if (i < len)
+		len = i;
 	str = malloc((sizeof(char)) * (len + 1));
 	if (!str)
 		return (NULL);
 	i = 0;
-	while(0 < start--)
-		s++;
+	s = s + start;
+	// while(0 < start--)
+	// 	s++;
 	while (*s && i < len)
 	{
 		str[i] = *s;

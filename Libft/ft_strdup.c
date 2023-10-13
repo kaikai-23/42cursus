@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:11:25 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/01 19:36:00 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/12 16:05:54 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ char	*ft_strdup(const char *s1)
 	return (arr);
 }
 
-// #include <stdio.h>
-// int main(){
-// 	printf("%s\n", ft_strdup("abcdefg"));
-// }
+#include <stdio.h>
+int main(){
+	// printf("%s\n", ft_strdup("abcdefg"));
+	// printf("%s\n", strdup(NULL));
+}

@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:34:21 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/04 13:47:02 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/10 19:31:30 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
+	if (!s)
+		return (NULL);
 	ft_putstr_fd(s, fd);
 	write(fd, "\n", 1);
 }

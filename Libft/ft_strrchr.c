@@ -6,13 +6,11 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 18:58:06 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/08 20:58:54 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/12 14:56:02 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-size_t			ft_strlen(const char *str);
 
 char	*ft_strrchr(const char *s, int c)
 {
@@ -24,7 +22,7 @@ char	*ft_strrchr(const char *s, int c)
 	while (0 < s_length && s[s_length] != after_convert)
 		s_length--;
 	if (s[s_length] == after_convert)
-		return ((char *)s + s_length);
+		return ((char *)(s + s_length));
 	else
 		return (NULL);
 }

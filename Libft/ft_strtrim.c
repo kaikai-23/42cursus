@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:57 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/03 14:21:00 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/13 15:17:52 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static int	ft_issetchecker(char c, char const *set)
 	return (0);
 }
 
-char *ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	start;
 	size_t	end;
 	char	*str;
-	
+
 	if ((s1 == NULL) || (set == NULL))
 		return (NULL);
 	start = 0;

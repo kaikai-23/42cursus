@@ -6,20 +6,16 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 14:20:42 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/03 14:20:45 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/13 15:12:20 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//debug
-#include <stdio.h>
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	len;
 	char	*str;
-	// size_t	i;
 
 	if (!s1 && !s2)
 		return (ft_strdup("\0"));

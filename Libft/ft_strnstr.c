@@ -6,13 +6,13 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 13:45:27 by hkai              #+#    #+#             */
-/*   Updated: 2023/10/01 18:37:53 by hkai             ###   ########.fr       */
+/*   Updated: 2023/10/12 15:11:59 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	match_check(const char *str, const char *needle, size_t len)
+static int	match_check(const char *str, const char *needle, size_t len)
 {
 	size_t	i;
 
