@@ -22,16 +22,16 @@ static int print_num(unsigned int num)
 int print_decimal(va_list ap)
 {
 	int num;
-	int i;
+	int count;
 	unsigned int unum;
 
 	unum = 0;
 	num = va_arg(ap, int); // int型の数値を引数リストから取得
-	i = 0;
+	count = 0;
 	// 負の数値の場合の処理
 	if (num < 0)
 	{
-		i += write(1, "-", 1);
+		count += write(1, "-", 1);
 		if (num == INT_MIN)
 		{
 			//一度INT_MAXにする
@@ -43,6 +43,7 @@ int print_decimal(va_list ap)
 	}
 	else
 		unum = (unsigned)num;
-	i += (int)print_num(unum);
-	return (i);
+	count += (int)print_num(unum);
+	return (count);
 }
+
