@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printpointer.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takaramonkai <takaramonkai@student.42.f    +#+  +:+       +#+        */
+/*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 19:19:51 by hkai              #+#    #+#             */
-/*   Updated: 2023/11/09 13:58:40 by takaramonka      ###   ########.fr       */
+/*   Updated: 2023/11/09 19:12:12 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int address_rec(unsigned long long num)
 		else
 			c = 'a' + (num - 10);
 		count += write(1, &c, 1);
-		return count;
+		return (count);
 	}
 	count += address_rec((num / 16));
 	count += address_rec((num % 16));

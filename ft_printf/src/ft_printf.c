@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:14:29 by hkai              #+#    #+#             */
-/*   Updated: 2023/11/09 18:16:42 by hkai             ###   ########.fr       */
+/*   Updated: 2023/11/09 19:24:21 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ int	judge_format(const char *format, va_list ap)
 		return (print_lower_hex(ap));
 	else if (*format == 'X')
 		return (print_upper_hex(ap));
-	else if (*format == '%')
-		return (write(1, "%", 1));
 	else
-		return (-1);
+		return (write(1, "%", 1));
 }
 
 int	ft_printf(const char *format, ...)
@@ -58,10 +56,7 @@ int	ft_printf(const char *format, ...)
 			format++;
 			while (*format && is_invalid_format(*format))
 				format++;
-			if (!*format || judge_format(format, ap) == -1)
-				return (count);//ずっと無効なフォーマットなら即リターン
-			else
-				count += judge_format(format, ap);
+			count += judge_format(format, ap);
 		}
 		else
 			count += write(1, format, 1);//普通にライトする
@@ -104,7 +99,7 @@ int	ft_printf(const char *format, ...)
 	// int k = printf("aa%zzzzd%s\n", 1, "bbb");
 	// printf("%d\n", k);
 	// k = ft_printf("aa%zzzzd%s\n", 1, "bbb");
-	// printf("%d", k);
+	// printf("%d\n", k);
 
 	// ft_printf("aa%zhh%s", "aaa", "bbb");
 	// ft_printf(" %z %s", "aaa", "bbb");
