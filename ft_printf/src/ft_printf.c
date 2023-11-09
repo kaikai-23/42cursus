@@ -6,11 +6,23 @@
 /*   By: takaramonkai <takaramonkai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:14:29 by hkai              #+#    #+#             */
-/*   Updated: 2023/11/09 13:52:54 by takaramonka      ###   ########.fr       */
+/*   Updated: 2023/11/09 15:11:39 by takaramonka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
+
+static int is_invalid_format(char c)
+{
+	if (c == 'c' || c == 's' || c == 'p' || c == 'd'
+		|| c == 'i' || c == 'u' || c == 'x' || c == 'X'
+			|| c == '%')
+	{
+		return (0);
+	}
+	else
+		return (1);
+}
 
 int	ft_printf(const char *format, ...)
 {
@@ -25,8 +37,8 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			// ここでフラグやフィールド幅、精度を解析し、対応する処理を行なう
-			//%cの処理
+			while(*format && is_invalid_format(*format))
+				format++;
 			if (*format == 'c')
 				count += print_char(ap);
 			else if (*format == 's')
@@ -44,10 +56,7 @@ int	ft_printf(const char *format, ...)
 			else if (*format == '%')
 				count += write(1, "%", 1);
 			else
-			{
-				// 無効なフォーマットのケース
-				// 記述なしで大丈夫そう
-			}
+				return (count);//ずっと無効なフォーマットなら即リターン
 		}
 		else
 			count += write(1, format, 1);//普通にライトする
@@ -88,6 +97,14 @@ int main()
 	// printf("\0");
 	// ft_printf("\0");
 	
+	/*無効なフォーマット指定子の場合・有効な指定子を探し出力*/
+	// int k = printf("aa%zzzzd%s\n", 1, "bbb");
+	// printf("%d\n", k);
+	// k = ft_printf("aa%zzzzd%s\n", 1, "bbb");
+	// printf("%d", k);
+
+	// ft_printf("aa%zhh%s", "aaa", "bbb");
+	// ft_printf(" %z %s", "aaa", "bbb");
 	// printf("aaaa\n");
 	// ft_printf("aaaa\n");
 	// printf("%caaaa\n", 'c');
@@ -96,8 +113,8 @@ int main()
 	// ft_printf("%saaaa\n", "str");
 	// printf("%p\n", "str");
 	// ft_printf("%p\n", "str");
-	// printf("%d\n", -2147483648);
-	// ft_printf("%d\n", -2147483648);
+	// printf("%d\n", -2147483647);
+	// ft_printf("%d\n", -2147483647);
 	// printf("%i\n", -12345);
 	// ft_printf("%i\n", -12345);
 	// printf("%u\n", 12345);

@@ -6,7 +6,7 @@
 /*   By: takaramonkai <takaramonkai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:59:12 by hkai              #+#    #+#             */
-/*   Updated: 2023/11/09 13:07:58 by takaramonka      ###   ########.fr       */
+/*   Updated: 2023/11/09 15:10:28 by takaramonka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 int	print_string(va_list ap)
 {
 	char	*str;
-	int		i;
+	int		count;
 
-	i = 0;
+	count = 0;
 	str = va_arg(ap, char *);
 	if (str == NULL)
 	{
-		i += write(1, "(null)", 6);
-		return (i);
+		count += write(1, "(null)", 6);
+		return (count);
 	}
 	while (*str)
 	{
-		i += write(1, str, 1);
+		count += write(1, str, 1);
 		str++;
 	}
-	return (i);
+	return (count);
 }
