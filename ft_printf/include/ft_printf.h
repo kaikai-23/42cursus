@@ -13,5 +13,6 @@ int print_unsigned(va_list ap);
 int print_lower_hex(va_list ap);
 int print_upper_hex(va_list ap);
 int print_positive_num(unsigned num);
+int	ft_printf(const char *format, ...);
 
 #endif
