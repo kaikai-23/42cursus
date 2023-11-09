@@ -6,40 +6,45 @@
 /*   By: takaramonkai <takaramonkai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 19:19:51 by hkai              #+#    #+#             */
-/*   Updated: 2023/11/08 11:06:18 by takaramonka      ###   ########.fr       */
+/*   Updated: 2023/11/09 13:58:40 by takaramonka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include "include/libft.h"
+#include "../include/ft_printf.h"
 
-void	print_pointer(va_list ap)
+static int address_rec(unsigned long long num)
+{
+	int c;
+	int count;
+
+	count = 0;
+	if (num < 16)
+	{
+		if (num < 10)
+			c = '0' + num;
+		else
+			c = 'a' + (num - 10);
+		count += write(1, &c, 1);
+		return count;
+	}
+	count += address_rec((num / 16));
+	count += address_rec((num % 16));
+	return (count);
+}
+
+int	print_pointer(va_list ap)
 {
 	void				*ptr;
 	unsigned long long	address;
-	char				buffer[20];
-	int					i;
+	int					count;
 
-	i = 0;
-	ptr = va_arg(ap, void *);
-	if (ptr == NULL)
-		buffer[i++] = '0';
+	count = 0;
+	count += write(1, "0x", 2); // 16進数を表す接頭辞
+	ptr = va_arg(ap, void*);//va_argを使用してポインタを取得する際は、通常 void * 型として取得する
+	address = (unsigned long long)ptr;
+	if (ptr == NULL)//直接unsigned long longとNULLは比較できない
+		count += write(1, "0", 1);
 	else
-	{
-		address = (unsigned long long)ptr;
-		while (address)
-		{
-			unsigned char hex_digit = address % 16;
-			if (hex_digit < 10)
-				buffer[i++] = '0' + hex_digit;
-			else
-				buffer[i++] = 'a' + (hex_digit - 10);
-			address /= 16;
-		}
-	}
-	write(1, "0x", 2); // 16進数を表す接頭辞
-	while (i > 0) // バッファの内容を逆順に出力
-	{
-		write(1, &buffer[--i], 1);
-	}
+		count += address_rec(address);
+	return (count);
 }

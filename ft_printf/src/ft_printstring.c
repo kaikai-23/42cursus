@@ -6,12 +6,11 @@
 /*   By: takaramonkai <takaramonkai@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:59:12 by hkai              #+#    #+#             */
-/*   Updated: 2023/11/08 12:14:41 by takaramonka      ###   ########.fr       */
+/*   Updated: 2023/11/09 13:07:58 by takaramonka      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include "include/libft.h"
+#include "../include/ft_printf.h"
 
 int	print_string(va_list ap)
 {

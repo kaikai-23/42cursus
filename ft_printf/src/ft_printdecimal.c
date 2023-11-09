@@ -1,29 +1,10 @@
-#include <stdarg.h>
-#include "include/libft.h"
-
-static int print_num(unsigned int num)
-{
-	unsigned int	c;
-	unsigned int	count;
-
-	count = 0;
-	if (num < 10)
-	{
-		c = '0' + num;
-		count += write(1, &c, 1);
-		return count;
-	}
-	count += print_num((num / 10));
-	c = '0' + (num % 10);
-	count += write(1, &c, 1);
-	return (count);
-}
+#include "../include/ft_printf.h"
 
 int print_decimal(va_list ap)
 {
 	int num;
-	int count;
-	unsigned int unum;
+	unsigned count;
+	unsigned unum;
 
 	unum = 0;
 	num = va_arg(ap, int); // int型の数値を引数リストから取得
@@ -43,7 +24,6 @@ int print_decimal(va_list ap)
 	}
 	else
 		unum = (unsigned)num;
-	count += (int)print_num(unum);
-	return (count);
+	count += print_positive_num(unum);
+	return ((int)count);
 }
-
