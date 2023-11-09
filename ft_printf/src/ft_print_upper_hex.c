@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_upper_hex.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/09 17:57:04 by hkai              #+#    #+#             */
+/*   Updated: 2023/11/09 17:58:37 by hkai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/ft_printf.h"
 
-static int hex_rec(unsigned num)
+static int	hex_rec(unsigned int num)
 {
-	unsigned	c;
-	unsigned	count;
+	unsigned int	c;
+	unsigned int	count;
 
 	count = 0;
 	if (num < 16)
@@ -13,19 +25,20 @@ static int hex_rec(unsigned num)
 		else
 			c = 'A' + (num - 10);
 		count += write(1, &c, 1);
-		return count;
+		return (count);
 	}
 	count += hex_rec((num / 16));
 	count += hex_rec((num % 16));
 	return (count);
 }
 
-int print_upper_hex(va_list ap)
+int	print_upper_hex(va_list ap)
 {
-	unsigned num;
-	int count = 0;
+	unsigned int	num;
+	int				count;
 
-	num = va_arg(ap, unsigned); 
+	count = 0;
+	num = va_arg(ap, unsigned int);
 	count += hex_rec(num);
 	return (count);
 }

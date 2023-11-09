@@ -3,25 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: takaramonkai <takaramonkai@student.42.f    +#+  +:+       +#+        */
+/*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:14:29 by hkai              #+#    #+#             */
-/*   Updated: 2023/11/09 15:11:39 by takaramonka      ###   ########.fr       */
+/*   Updated: 2023/11/09 18:16:42 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static int is_invalid_format(char c)
+static int	is_invalid_format(char c)
 {
 	if (c == 'c' || c == 's' || c == 'p' || c == 'd'
-		|| c == 'i' || c == 'u' || c == 'x' || c == 'X'
-			|| c == '%')
-	{
+		|| c == 'i' || c == 'u' || c == 'x' || c == 'X' || c == '%')
 		return (0);
-	}
 	else
 		return (1);
+}
+
+int	judge_format(const char *format, va_list ap)
+{
+	if (*format == 'c')
+		return (print_char(ap));
+	else if (*format == 's')
+		return (print_string(ap));
+	else if (*format == 'p')
+		return (print_pointer(ap));
+	else if (*format == 'd' || *format == 'i')
+		return (print_decimal(ap));
+	else if (*format == 'u')
+		return (print_unsigned(ap));
+	else if (*format == 'x')
+		return (print_lower_hex(ap));
+	else if (*format == 'X')
+		return (print_upper_hex(ap));
+	else if (*format == '%')
+		return (write(1, "%", 1));
+	else
+		return (-1);
 }
 
 int	ft_printf(const char *format, ...)
@@ -37,42 +56,26 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			while(*format && is_invalid_format(*format))
+			while (*format && is_invalid_format(*format))
 				format++;
-			if (*format == 'c')
-				count += print_char(ap);
-			else if (*format == 's')
-				count += print_string(ap);
-			else if (*format == 'p')
-				print_pointer(ap);
-			else if (*format == 'd' || *format == 'i')
-				count += print_decimal(ap);
-			else if (*format == 'u')
-				count += print_unsigned(ap);
-			else if (*format == 'x')
-				count += print_lower_hex(ap);
-			else if (*format == 'X')
-				count += print_upper_hex(ap);
-			else if (*format == '%')
-				count += write(1, "%", 1);
-			else
+			if (!*format || judge_format(format, ap) == -1)
 				return (count);//ずっと無効なフォーマットなら即リターン
+			else
+				count += judge_format(format, ap);
 		}
 		else
 			count += write(1, format, 1);//普通にライトする
 		format++;
 	}
-
 	va_end(ap);//可変リストの終了処理
-	
 	return (count);//書き込んだ文字数を返す
 }
 
 
 //全般的なテスト
-#include <stdio.h>
-int main()
-{
+// #include <stdio.h>
+// int main()
+// {
 	/*
 		そもそもprintfにNULLが入ってくるパターン
 		セグフォでクラッシュする
@@ -96,7 +99,7 @@ int main()
 	*/
 	// printf("\0");
 	// ft_printf("\0");
-	
+
 	/*無効なフォーマット指定子の場合・有効な指定子を探し出力*/
 	// int k = printf("aa%zzzzd%s\n", 1, "bbb");
 	// printf("%d\n", k);
@@ -131,7 +134,7 @@ int main()
 	// ft_printf("%%\n", 255);
 	// printf("aa%z\n", 255);
 	// ft_printf("aa%z\n", 255);
-}
+// }
 
 // %cのテスト
 // #include <stdio.h>
@@ -195,22 +198,22 @@ int main()
 // #include <stdio.h>
 // int main()
 // {
-	// printf(" %p \n", -1);
-	// ft_printf(" %p \n", -1);
-	// printf(" %p \n", 1);
-	// ft_printf(" %p \n", 1);
-	// printf(" %p \n", 15);
-	// ft_printf(" %p \n", 15);
-	// printf(" %p \n", 16);
-	// ft_printf(" %p \n", 16);
-	// printf(" %p \n", 17);
-	// ft_printf(" %p \n", 17);
-	// printf(" %p %p\n", LONG_MIN, LONG_MAX);
-	// ft_printf(" %p %p\n", LONG_MIN, LONG_MAX);
-	// printf(" %p %p\n", INT_MIN, INT_MAX);
-	// ft_printf(" %p %p\n", INT_MIN, INT_MAX);
-	// printf(" %p %p\n", ULONG_MAX, -ULONG_MAX);
-	// ft_printf(" %p %p\n", ULONG_MAX, -ULONG_MAX);
+// 	printf(" %p \n", -1);
+// 	ft_printf(" %p \n", -1);
+// 	printf(" %p \n", 1);
+// 	ft_printf(" %p \n", 1);
+// 	printf(" %p \n", 15);
+// 	ft_printf(" %p \n", 15);
+// 	printf(" %p \n", 16);
+// 	ft_printf(" %p \n", 16);
+// 	printf(" %p \n", 17);
+// 	ft_printf(" %p \n", 17);
+// 	printf(" %p %p\n", LONG_MIN, LONG_MAX);
+// 	ft_printf(" %p %p\n", LONG_MIN, LONG_MAX);
+// 	printf(" %p %p\n", INT_MIN, INT_MAX);
+// 	ft_printf(" %p %p\n", INT_MIN, INT_MAX);
+// 	printf(" %p %p\n", ULONG_MAX, -ULONG_MAX);
+// 	ft_printf(" %p %p\n", ULONG_MAX, -ULONG_MAX);
 // 	printf(" %p \n", 0);
 // 	ft_printf(" %p \n", 0);
 // }
