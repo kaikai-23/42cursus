@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 17:39:39 by hkai              #+#    #+#             */
-/*   Updated: 2023/11/09 17:42:06 by hkai             ###   ########.fr       */
+/*   Updated: 2023/11/13 15:01:58 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static int	hex_rec(unsigned int num)
 	return (count);
 }
 
-int	print_lower_hex(va_list ap)
+int	print_lower_hex(va_list *ap)
 {
 	unsigned int	num;
 	int				count;
 
 	count = 0;
-	num = va_arg(ap, unsigned int);
+	num = va_arg(*ap, unsigned int);
 	count += hex_rec(num);
 	return (count);
 }

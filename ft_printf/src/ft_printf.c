@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:14:29 by hkai              #+#    #+#             */
-/*   Updated: 2023/11/09 19:24:21 by hkai             ###   ########.fr       */
+/*   Updated: 2023/11/13 15:20:03 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	is_invalid_format(char c)
 		return (1);
 }
 
-int	judge_format(const char *format, va_list ap)
+int	judge_format(const char *format, va_list *ap)
 {
 	if (*format == 'c')
 		return (print_char(ap));
@@ -56,7 +56,7 @@ int	ft_printf(const char *format, ...)
 			format++;
 			while (*format && is_invalid_format(*format))
 				format++;
-			count += judge_format(format, ap);
+			count += judge_format(format, &ap);
 		}
 		else
 			count += write(1, format, 1);//普通にライトする
@@ -68,9 +68,9 @@ int	ft_printf(const char *format, ...)
 
 
 //全般的なテスト
-// #include <stdio.h>
-// int main()
-// {
+#include <stdio.h>
+int main()
+{
 	/*
 		そもそもprintfにNULLが入ってくるパターン
 		セグフォでクラッシュする
@@ -105,8 +105,8 @@ int	ft_printf(const char *format, ...)
 	// ft_printf(" %z %s", "aaa", "bbb");
 	// printf("aaaa\n");
 	// ft_printf("aaaa\n");
-	// printf("%caaaa\n", 'c');
-	// ft_printf("%caaaa\n", 'c');
+	// printf("%c %c %c\n", '1', '2', '3');
+	// ft_printf("%c %c %c\n", '1', '2', '3');
 	// printf("%saaaa\n", "str");
 	// ft_printf("%saaaa\n", "str");
 	// printf("%p\n", "str");
@@ -129,7 +129,7 @@ int	ft_printf(const char *format, ...)
 	// ft_printf("%%\n", 255);
 	// printf("aa%z\n", 255);
 	// ft_printf("aa%z\n", 255);
-// }
+}
 
 // %cのテスト
 // #include <stdio.h>
