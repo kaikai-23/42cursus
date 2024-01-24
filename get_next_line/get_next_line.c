@@ -11,6 +11,12 @@
 #define BUFFER_SIZE 5
 #endif
 
+// Leakのチェック
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q a.out");
+}
+
 size_t	ft_strlen(const char *str)
 {
 	size_t	length;
@@ -107,20 +113,30 @@ char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	len;
 	char	*str;
+	size_t	i;
+	size_t	j;
 
-	if (!s1 && !s2)
-		return (ft_strdup("\0"));
-	else if (!s1)
-		return (ft_strdup(s2));
-	else if (!s2)
-	return (ft_strdup(s1));
+	if (!s1 || !s2)
+		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
 	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	//ft_strlcpyはヌル文字まで入れてくれるやつ
-	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
-	ft_strlcpy(str + ft_strlen(s1), s2, ft_strlen(s2) + 1);
+	i = 0;
+	while(s1[i] != 0)
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while(s2[j] != 0)
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
+	str[len] = '\0';
+
 	return (str);
 }
 
@@ -129,9 +145,9 @@ char *get_oneline(char *store, int *count_p)
 	char *oneline;
 	
     // 処理後ファイルが終わりに達した場合はNULLを返す
-    if (!store || *store == '\0')
+    if (!store || store[0] == '\0')
 	{
-        free(store);
+        // ここでstoreはfreeしちゃだめ（次のところでfreeするから）
         store = NULL;
         return NULL;
     }
@@ -152,7 +168,6 @@ char *get_oneline(char *store, int *count_p)
 		oneline = strndup(store, (*count_p + 1));
 		oneline[*count_p] = '\0';
 	}
-
 
 	return (oneline);
 }
@@ -177,7 +192,7 @@ char	*read_line(int fd, char *store)
 	{
 		byte_read = read(fd, buf, BUFFER_SIZE);
 		// read失敗のエラー処理,storeがNULLのケース
-		if (byte_read < 0 || (!store && byte_read == 0))
+		if (byte_read < 0)
 		{
 			free(store);
 			return (NULL);
@@ -200,7 +215,12 @@ char *find_next_line(char *store, int *count_p)
 {
 	// ファイル終端
 	if (store[*count_p] == '\0')
+	{
+		// freeしてからNULL返す
+		free(store);
 		return NULL;
+	}
+
 	int temp_len = ft_strlen(store) - *count_p;
 	char *temp = calloc((temp_len + 1), sizeof(char));
 	*count_p = *count_p + 1;
@@ -216,8 +236,9 @@ char *find_next_line(char *store, int *count_p)
 }
 
 // まずはすべてを読み込んで返す関数を作ってみる
-char    *get_next_line_test(int fd)
+char    *get_next_line(int fd)
 {
+	
 	// 改行が見つかるまで読み込んだ行を保持し続ける変数
 	static char *store;
 	char		*oneline;
@@ -229,9 +250,15 @@ char    *get_next_line_test(int fd)
         write(1, "無効なファイルディスクリプタorバッファサイズ", 42);
         return (NULL);
     }
-	if (!(store = read_line(fd, store)))
+	store = read_line(fd, store);
+	if (!store)
+	{
+		free(store);
 		return NULL;
+	}
 	oneline = get_oneline(store, &count);
+
 	store = find_next_line(store, &count);
+
     return (oneline);
 }
