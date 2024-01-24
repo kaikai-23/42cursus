@@ -102,6 +102,7 @@ char	*ft_strdup(const char *s1)
 // 	res[sizetotal] = 0;
 // 	return (res);
 // }
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	len;
@@ -123,144 +124,115 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
+char *get_oneline(char *store, int *count_p)
+{
+	char *oneline;
+	
+    // 処理後ファイルが終わりに達した場合はNULLを返す
+    if (!store || *store == '\0')
+	{
+        free(store);
+        store = NULL;
+        return NULL;
+    }
+
+	// *count_p = 0;
+	while (store[*count_p] && store[*count_p] != '\n')
+		*count_p = *count_p + 1;
+	
+	// 出力するためのoneline。\nと\0の2つ分を考慮してコピー
+	if (store[*count_p] && store[*count_p] == '\n')
+	{
+		oneline = strndup(store, (*count_p + 2));
+		oneline[*count_p + 1] = '\0';
+	}
+	else
+	{
+		// 改行見つからないケース
+		oneline = strndup(store, (*count_p + 1));
+		oneline[*count_p] = '\0';
+	}
+
+
+	return (oneline);
+}
+
 // read_line関数(readしたものをstoreに保存)
 char	*read_line(int fd, char *store)
 {
 	// BUFFER_SIZE分の一時保存場所
-	char buf[BUFFER_SIZE+1];
+	char *buf;
 	ssize_t		byte_read;
 	char		*temp;
 
-	while ((byte_read = read(fd, buf, BUFFER_SIZE)) > 0)
+	// 最初だけstore確保
+	if (!store)
+		store = strdup("");
+	// BUFFER_SIZEが大きくなるとbufに残ったりするから動的確保
+	buf = calloc(BUFFER_SIZE+1, sizeof(char));
+
+	byte_read = 1;
+
+	while (byte_read != 0)
 	{
+		byte_read = read(fd, buf, BUFFER_SIZE);
+		// read失敗のエラー処理,storeがNULLのケース
+		if (byte_read < 0 || (!store && byte_read == 0))
+		{
+			free(store);
+			return (NULL);
+		}
 		// 最後の文字をヌル埋め
 		buf[byte_read] = '\0';
 
 		temp = ft_strjoin(store, buf);
 		free(store);
 		store = temp;
+		
 		// 改行が見つかった場合の処理
 		if (ft_strchr(store, '\n')) break;
 	}
-	// readが失敗した時のエラー処理
-	if (byte_read < 0)
-	{
-		free(store);
-		return (NULL);
-	}
+	free(buf);
 	return (store);
 }
 
-
+char *find_next_line(char *store, int *count_p)
+{
+	// ファイル終端
+	if (store[*count_p] == '\0')
+		return NULL;
+	int temp_len = ft_strlen(store) - *count_p;
+	char *temp = calloc((temp_len + 1), sizeof(char));
+	*count_p = *count_p + 1;
+	int i = 0;
+	while (store[*count_p])
+	{
+		temp[i] = store[*count_p];
+		i++;
+		*count_p = *count_p + 1;
+	}
+	free(store);
+	return (temp);
+}
 
 // まずはすべてを読み込んで返す関数を作ってみる
 char    *get_next_line_test(int fd)
 {
+	// 改行が見つかるまで読み込んだ行を保持し続ける変数
+	static char *store;
+	ssize_t		byte_read;
+	char		*oneline;
+	int	count = 0;
+
 	// 無効な識別子
     if (fd < 0 || BUFFER_SIZE <= 0)
     {
         write(1, "無効なファイルディスクリプタorバッファサイズ", 42);
         return (NULL);
     }
-
-	// 改行が見つかるまで読み込んだ行を保持し続ける変数
-	static char *store;
-	ssize_t		byte_read;
-
-	// 最初だけstore確保
-	if (!store)
-	{
-		if (!(store = strdup("")))
-		{
-			free(store);
-			return (NULL);
-		}
-	}
-
-// ここから下をread_line関数に入れる
-
-	// // 一時保存場所の確保
-	// char buf[BUFFER_SIZE+1];
-
-
-	// while ((byte_read = read(fd, buf, BUFFER_SIZE)) > 0)
-	// {
-	// 	// 最後の文字をヌル埋め
-	// 	buf[byte_read] = '\0';
-
-	// 	char *temp = ft_strjoin(store, buf);
-	// 	if(!temp)
-	// 	{
-	// 		free(temp);
-	// 		return (NULL);
-	// 	}
-	// 	free(store);
-	// 	store = temp;
-
-	// 	if (strchr(store, '\n'))
-	// 	{
-	// 		break;
-	// 	}
-	// }
-	// // readが失敗した時のエラー処理
-	// if (byte_read < 0)
-	// {
-	// 	free(store);
-	// 	return (NULL);
-	// }
-	if ((store = read_line(fd, store)) == NULL)
+	if (!(store = read_line(fd, store)))
 		return NULL;
-
-    // 処理後storeが空の場合はNULLを返す
-    if (!store || *store == '\0') {
-        free(store);
-        store = NULL;
-        return NULL;
-    }
-
-	
-	// 出力の１行を見つける
-	int count = 0;
-	while (store[count] && store[count] != '\n') count++;
-	
-	// 出力するためのoneline。\nと\0の2つ分を考慮してコピー
-	char *oneline;
-	if (store[count] && store[count] == '\n')
-	{
-		oneline = strndup(store, (count + 2));
-		// 改行の次に'\0'
-		oneline[count+1] = '\0';
-	}
-	else
-	{
-		// 改行見つからないケース
-		oneline = strndup(store, (count + 1));
-		oneline[count] = '\0';
-	}
-
-	// 以降行更新の処理
-
-	// ファイルの最後だったら
-	if (store[count] == '\0')
-	{
-		free(store);
-		return NULL;
-	}
-
-	int newline_len = ft_strlen(store) - count;
-	char *temp = malloc(sizeof(char) * (newline_len + 1));
-	count++;
-
-
-	int j = 0;
-	while(store[count])
-	{
-		temp[j] = store[count];
-		j++;
-		count++;
-	}
-	free(store);
-	store = temp;
-
+	oneline = get_oneline(store, &count);
+	store = find_next_line(store, &count);
     return (oneline);
 }
