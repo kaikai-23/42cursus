@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 // function for Leak
 // __attribute__((destructor))
@@ -30,25 +30,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str[i++] = s2[j++];
 	str[len] = '\0';
 	return (str);
-}
-
-char    *get_next_line(int fd)
-{
-	static char *store;
-	char		*oneline;
-	int		count;
-
-    if (fd < 0 || BUFFER_SIZE <= 0)
-        return (NULL);
-	if (!(store = read_line(fd, store)))
-	{
-		free(store);
-		return NULL;
-	}
-	count = 0;
-	oneline = get_oneline(store, &count);
-	store = find_next_line(store, &count);
-    return (oneline);
 }
 
 char	*read_line(int fd, char *store)
@@ -102,7 +83,6 @@ char *get_oneline(char *store, int *count_p)
 	return (oneline);
 }
 
-
 char *find_next_line(char *store, int *count_p)
 {
 	if (store[*count_p] == '\0')
@@ -123,3 +103,23 @@ char *find_next_line(char *store, int *count_p)
 	free(store);
 	return (temp);
 }
+
+char    *get_next_line(int fd)
+{
+	static char *store[OPEN_MAX];
+	char		*oneline;
+	int		count;
+
+    if (fd < 0 || BUFFER_SIZE <= 0)
+        return (NULL);
+	if (!(store[fd] = read_line(fd, store[fd])))
+	{
+		free(store[fd]);
+		return NULL;
+	}
+	count = 0;
+	oneline = get_oneline(store[fd], &count);
+	store[fd] = find_next_line(store[fd], &count);
+    return (oneline);
+}
+
