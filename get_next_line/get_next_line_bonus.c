@@ -40,7 +40,7 @@ char	*read_line(int fd, char *store)
 
 	if (!store)
 		store = ft_strdup("");
-	buf = calloc(BUFFER_SIZE+1, sizeof(char));
+	buf = ft_calloc(BUFFER_SIZE+1, sizeof(char));
 	byte_read = 1;
 	while (byte_read != 0)
 	{
@@ -91,7 +91,7 @@ char *find_next_line(char *store, int *count_p)
 		return NULL;
 	}
 	int temp_len = ft_strlen(store) - *count_p;
-	char *temp = calloc((temp_len + 1), sizeof(char));
+	char *temp = ft_calloc((temp_len + 1), sizeof(char));
 	*count_p = *count_p + 1;
 	int i = 0;
 	while (store[*count_p])
@@ -110,7 +110,7 @@ char    *get_next_line(int fd)
 	char		*oneline;
 	int		count;
 
-    if (fd < 0 || BUFFER_SIZE <= 0)
+    if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
         return (NULL);
 	if (!(store[fd] = read_line(fd, store[fd])))
 	{
