@@ -6,7 +6,7 @@
 /*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 14:38:26 by hkai              #+#    #+#             */
-/*   Updated: 2024/03/17 11:28:52 by hkai             ###   ########.fr       */
+/*   Updated: 2024/03/17 11:58:40 by hkai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_oneline(char *store, int *count_p)
 		*count_p = *count_p + 1;
 	oneline = ft_calloc(*count_p + 2, sizeof(char));
 	if (!oneline)
-		return (NULL);
+		return (free_store_on_error(&store));
 	*count_p = 0;
 	while (store[*count_p] && store[*count_p] != '\n')
 	{
@@ -57,14 +57,11 @@ char	*find_next_line(char *store, int *count_p)
 	int		i;
 
 	if (store[*count_p] == '\0')
-	{
-		free(store);
-		return (NULL);
-	}
+		return (free_store_on_error(&store));
 	temp_len = ft_strlen(store) - *count_p;
 	temp = ft_calloc((temp_len + 1), sizeof(char));
 	if (!temp)
-		return (NULL);
+		return (free_store_on_error(&store));
 	*count_p = *count_p + 1;
 	i = 0;
 	while (store[*count_p])
@@ -114,16 +111,15 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!store[fd])
 		store[fd] = ft_strdup("");
-	buf = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!store[fd] || !buf)
-	{
-		free(store[fd]);
-		return (NULL);
-	}
-	store[fd] = read_line(fd, store[fd], buf);
-	free(buf);
 	if (!store[fd])
 		return (NULL);
+	buf = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!buf)
+		return (free_store_on_error(&store[fd]));
+	store[fd] = read_line(fd, store[fd], buf);
+	if (!store[fd])
+		return (NULL);
+	free(buf);
 	count = 0;
 	oneline = get_oneline(store[fd], &count);
 	store[fd] = find_next_line(store[fd], &count);
