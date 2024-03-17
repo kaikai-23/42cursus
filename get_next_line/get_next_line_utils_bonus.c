@@ -1,4 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/25 14:36:47 by hkai              #+#    #+#             */
+/*   Updated: 2024/03/17 11:29:09 by hkai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	len;
+	char	*str;
+	size_t	i;
+	size_t	j;
+
+	if (!s1 || !s2)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s1[i] != 0)
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j] != 0)
+		str[i++] = s2[j++];
+	str[len] = '\0';
+	return (str);
+}
 
 size_t	ft_strlen(const char *str)
 {
@@ -23,24 +61,11 @@ char	*ft_strchr(const char *s, int c)
 		return (NULL);
 }
 
-void	ft_bzero(void *s, size_t n)
-{
-	unsigned char	*dest;
-	size_t			i;
-
-	i = 0;
-	dest = (unsigned char *)s;
-	while (i < n)
-	{
-		dest[i] = 0;
-		i++;
-	}
-}
-
 void	*ft_calloc(size_t count, size_t size)
 {
-	void	*arr;
-	size_t	n;
+	unsigned char	*arr;
+	size_t			n;
+	size_t			i;
 
 	if (size && count > SIZE_MAX / size)
 		return (NULL);
@@ -50,8 +75,13 @@ void	*ft_calloc(size_t count, size_t size)
 		n = count * size;
 	arr = malloc(n);
 	if (!arr)
-		return (arr);
-	ft_bzero(arr, n);
+		return (NULL);
+	i = 0;
+	while (i < n)
+	{
+		arr[i] = 0;
+		i++;
+	}
 	return (arr);
 }
 

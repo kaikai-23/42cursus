@@ -1,19 +1,31 @@
-#ifndef GET_NEXT_LINE_H
-#define GET_NEXT_LINE_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hkai <hkai@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/25 14:50:29 by hkai              #+#    #+#             */
+/*   Updated: 2024/03/17 10:34:39 by hkai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// BUFFER_SIZEが定義されていなければ5で定義
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 5
-#endif
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 5
+# endif
 
 // size_t
-#include <unistd.h>
-#include <stdlib.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
 
-char *get_next_line(int fd);
-char	*read_line(int fd, char *store);
-char *get_oneline(char *store, int *count_p);
-char *find_next_line(char *store, int *count_p);
+char	*get_next_line(int fd);
+char	*read_line(int fd, char *store, char *buf);
+char	*get_oneline(char *store, int *count_p);
+char	*find_next_line(char *store, int *count_p);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *s, int c);
