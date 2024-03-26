@@ -16,10 +16,14 @@ int main(int argc, char *argv[])
     while (1)
     {
         oneline = get_next_line(fd);
-        printf("result:%s\n", oneline);
-        free(oneline);
+		// oneline = get_next_line(0);
         if (!oneline)
+        {
+            free(oneline);
             break ;
+        }
+        printf("result:%s", oneline);
+        free(oneline);
     }
 
     close(fd);
